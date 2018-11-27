@@ -1,7 +1,62 @@
+<!DOCTYPE html>
 <html>
-<head></head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocation</title>
+</head>
+
 <body>
-    <p>Hello World</p>
-    <p>goy goy</p>
+    <p id="display"></p>
+
+    <script>
+        var display = document.getElementById('display');
+
+        if ("geolocation" in navigator) {
+            display.innerHTML = 'geolocation is available';
+        } else {
+            display.innerHTML = 'geolocation unavailable';
+        }
+
+        function geo_success(position) {
+            display.innerHTML = position.coords.latitude + ', ' + position.coords.longitude;
+        }
+
+        function geo_error() {
+            alert("Sorry, no position available.");
+        }
+
+        var geo_options = {
+            enableHighAccuracy: true,
+            maximumAge: 30000,
+            timeout: 27000
+        };
+
+        var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+
+
+
+
+
+        // demo();     
+
+        // async function demo() {
+        //     console.log('Taking a break...');
+        //     await sleep(500);
+        //     console.log('Half second later');
+        //     displayCoordinates();
+        // }
+
+        // function sleep(ms) {
+        //     return new Promise(resolve => setTimeout(resolve, ms));
+        // }
+
+        // function displayCoordinates() {
+        //     navigator.geolocation.getCurrentPosition(function (position) {
+        //         display.innerHTML = position.coords.latitude + ', ' + position.coords.longitude;
+        //     });
+        // }
+    </script>
 </body>
+
 </html>
